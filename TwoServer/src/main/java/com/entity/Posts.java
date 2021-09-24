@@ -57,10 +57,6 @@ public class Posts implements Serializable {
     @JsonIgnore
     private List<com.entity.Users> listusersliked;
 
-    /*@ManyToOne(fetch= FetchType.EAGER,cascade=CascadeType.REFRESH)
-    @JoinTable(name = "Uusers_posts",
-            joinColumns = @JoinColumn(name= "post_id"),
-            inverseJoinColumns =  @JoinColumn(name= "user_id"))*/
     @ManyToOne( cascade = CascadeType.REFRESH)
     @JoinColumn(name = "owner")
     @JsonIgnoreProperties({"listPost", "listComment","listlike"})

@@ -47,7 +47,6 @@ public class CommentsController
        @Operation(summary = "Создание комментария")
        public ResponseEntity<?> create(@RequestBody Comments new_comments, @PathVariable(name = "parent_id") @Parameter(description = "id комментария-родителя") Optional<Long> parent_comments, @PathVariable(name = "id") int posts_id)
     {
-
         if (SecurityRolesManager.checkPermission(ActionType.WRITE_COMMENTS))
         {
             if (parent_comments.isPresent())

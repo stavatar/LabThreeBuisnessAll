@@ -27,15 +27,13 @@ public class JaasLoginModule implements LoginModule, ApplicationContextAware
 	 static ApplicationContext context;
     private CallbackHandler handler;
     private Subject subject;
-    private  String login;
     private Users user;
 
     @Autowired
     private JwtProvider jwtProvider;
     @Autowired
     private UserService userService;
-    @Autowired
-    private DefaultJaasAuthenticationProvider defaultJaasAuthenticationProvider;
+
 
     public void initialize(Subject subject, CallbackHandler callbackHandler, Map<String, ?> sharedState, Map<String, ?> options)
         {
@@ -43,7 +41,6 @@ public class JaasLoginModule implements LoginModule, ApplicationContextAware
             this.subject = subject;
             jwtProvider= (JwtProvider) context.getBean("jwtProvider");
             userService=(UserService) context.getBean("userService");
-
         }
 
 
@@ -57,7 +54,6 @@ public class JaasLoginModule implements LoginModule, ApplicationContextAware
         try {
 
             handler.handle(callbacks);
-            String name = ((NameCallback) callbacks[0]).getName();
             String password = String.valueOf(((PasswordCallback) callbacks[1]).getPassword());
             String userLogin = jwtProvider.getLoginFromToken(password);
             Users userEntity =userService.findByLogin(userLogin);

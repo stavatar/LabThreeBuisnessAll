@@ -46,29 +46,25 @@ public class PostService
         {
             postsRepository.save(post);
             return null;
-        });;
+        });
     }
 
 
-     public void make_rate(Posts post,Users user,boolean likeordislike)
+    private void make_rate(Posts post,Users user,boolean likeordislike)
      {
          post.setCountLike(likeordislike ? (post.getCountLike() + 1) : (post.getCountLike() - 1));
          user.getListlike().put(post, likeordislike);
-
-
      }
 
-     public void remove_rate(Posts post,Users user,boolean likeordislike)
+    private void remove_rate(Posts post,Users user,boolean likeordislike)
      {
           post.setCountLike(likeordislike?(post.getCountLike() - 1):(post.getCountLike()+1));
           user.getListlike().remove(post);
-
      }
-    public void remove_lastrate(Posts post,Users user,boolean likeordislike)
+    private void remove_lastrate(Posts post,Users user,boolean likeordislike)
     {
         post.setCountLike(likeordislike?(post.getCountLike() + 1):(post.getCountLike()-1));
         user.getListlike().remove(post);
-
     }
      public ResponseEntity<?> add_like(int id_post, String login, boolean likeordislike)
      {

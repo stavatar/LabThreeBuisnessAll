@@ -16,7 +16,7 @@ import javax.jms.TextMessage;
 @EnableJms
 public class Listener {
     @Autowired
-    DeleteObject deleteObject;
+    private DeleteObject deleteObject;
     @JmsListener(destination = "deleteObject.topic")
     @SendTo("answer")
     public String receiveMessageFromTopic(final Message jsonMessage) throws JMSException

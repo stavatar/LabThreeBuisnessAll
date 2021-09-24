@@ -22,10 +22,12 @@ public class CommentService
 
     @Autowired
     private TransactionTemplate transactionTemplate;
+
      public void save(Comments comment)
      {
          commentsRepository.save(comment);
      }
+
     public List<Comments> getAll()
     {
         return (List<Comments>) commentsRepository.findAll();

@@ -12,7 +12,7 @@ import java.util.Set;
 public class JaasAuthorityGranter implements AuthorityGranter
 {
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Override
     public Set<String> grant(Principal principal)
     {

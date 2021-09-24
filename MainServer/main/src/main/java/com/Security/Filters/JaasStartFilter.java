@@ -18,7 +18,7 @@ import static org.springframework.util.StringUtils.hasText;
 @Log
 public class JaasStartFilter extends GenericFilterBean
 {
-    public static final String AUTHORIZATION = "Authorization";
+    private static final String AUTHORIZATION = "Authorization";
     private String getTokenFromRequest(HttpServletRequest request) {
         String bearer = request.getHeader(AUTHORIZATION);
         if (hasText(bearer))

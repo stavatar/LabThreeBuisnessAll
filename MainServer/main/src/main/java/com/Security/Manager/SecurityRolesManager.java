@@ -7,7 +7,7 @@ import java.util.*;
 
 public class SecurityRolesManager
 {
-    public  static  HashMap<RoleType, Set<ActionType>> roleAction;
+    private   static  HashMap<RoleType, Set<ActionType>> roleAction;
     static
     {
         roleAction=new HashMap<>();

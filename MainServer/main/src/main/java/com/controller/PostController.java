@@ -70,7 +70,7 @@ public class PostController
     }
     @GetMapping(value = "/user/post{id}/like/")
     @Operation(summary = "Поставить лайк к посту")
-    public  ResponseEntity<?> like(@PathVariable(name = "id") int post_id)
+    public   ResponseEntity<?> like(@PathVariable(name = "id") int post_id)
     {
        return postService.add_like(post_id,SecurityRolesManager.getNameCurrentUser(),true);
     }
