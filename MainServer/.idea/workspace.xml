@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec8ac73c-1300-4f0c-b3da-f700d105312b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/main/src/main/java/com/Security/Filters/JaasStartFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/java/com/Security/Filters/JaasStartFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/main/java/com/Security/Jaas/JaasAuthorityGranter.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/java/com/Security/Jaas/JaasAuthorityGranter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/main/java/com/Security/Jaas/JaasLoginModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/java/com/Security/Jaas/JaasLoginModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/main/java/com/Security/Manager/SecurityRolesManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/java/com/Security/Manager/SecurityRolesManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/main/java/com/controller/CommentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/java/com/controller/CommentsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/main/java/com/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/java/com/controller/PostController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/src/main/java/com/service/WorkerWithLikes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/main/java/com/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/java/com/service/PostService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TwoServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TwoServer/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -37,6 +33,13 @@
       </path>
     </expand>
     <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -214,6 +217,7 @@
       <workItem from="1631606052223" duration="5023000" />
       <workItem from="1632480942964" duration="622000" />
       <workItem from="1632482264477" duration="463000" />
+      <workItem from="1632483266604" duration="1835000" />
     </task>
     <servers />
   </component>

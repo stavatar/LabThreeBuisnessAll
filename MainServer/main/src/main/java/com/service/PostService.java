@@ -21,7 +21,6 @@ public class PostService
 {
     @Autowired
     private PostsRepository postsRepository;
-
     @Autowired
     private UserService userService;
     @Autowired
@@ -50,87 +49,57 @@ public class PostService
     }
 
 
-    private void make_rate(Posts post,Users user,boolean likeordislike)
+     public ResponseEntity<?> add_like(int id_post, String login, boolean likeOrDislike)
      {
-         post.setCountLike(likeordislike ? (post.getCountLike() + 1) : (post.getCountLike() - 1));
-         user.getListlike().put(post, likeordislike);
-     }
+         return (ResponseEntity<?>) transactionTemplate.execute((TransactionCallback) status -> {
+             Users user = userService.findByLogin(login);
+             Posts post = postsRepository.findById((long) id_post).get();
 
-    private void remove_rate(Posts post,Users user,boolean likeordislike)
-     {
-          post.setCountLike(likeordislike?(post.getCountLike() - 1):(post.getCountLike()+1));
-          user.getListlike().remove(post);
-     }
-    private void remove_lastrate(Posts post,Users user,boolean likeordislike)
-    {
-        post.setCountLike(likeordislike?(post.getCountLike() + 1):(post.getCountLike()-1));
-        user.getListlike().remove(post);
-    }
-     public ResponseEntity<?> add_like(int id_post, String login, boolean likeordislike)
-     {
-         return (ResponseEntity<?>) transactionTemplate.execute(new TransactionCallback() {
-             public Object doInTransaction(TransactionStatus status) {
-                 Users user = userService.findByLogin(login);
-                 Posts post = postsRepository.findById((long) id_post).get();
-                 StringBuilder answer = new StringBuilder();
-                 if (likeordislike) answer.append("Лайк ");
-                 else answer.append("Дизлайк ");
-
-                 if (!user.getListlike().containsKey(post)) {
-                     make_rate(post, user, likeordislike);
-                     answer.append(" поставлен");
-                     userService.save(user);
-                     postsRepository.save(post);
-                 } else {
-                     if (user.getListlike().get(post) == likeordislike) {
-                         remove_rate(post, user, likeordislike);
-                         answer.append(" убран");
-                     } else {
-                         remove_lastrate(post, user, likeordislike);
-                         make_rate(post, user, likeordislike);
-                         answer.append(" поставлен");
+             if (!user.getListlike().containsKey(post)) {
+                 WorkerWithLikes.make_rate(post, user, likeOrDislike);
+                 userService.save(user);
+                 postsRepository.save(post);
+             }
+               else
+                  if (user.getListlike().get(post) == likeOrDislike)
+                      WorkerWithLikes.remove_rate(post, user, likeOrDislike);
+                      else {
+                          WorkerWithLikes.remove_lastrate(post, user, likeOrDislike);
+                          WorkerWithLikes.make_rate(post, user, likeOrDislike);
                      }
-                     ;
-                     userService.save(user);
-                     postsRepository.save(post);
-
-                 }
-                 return new ResponseEntity<>(HttpStatus.OK);
-             }});
-
+             userService.save(user);
+             postsRepository.save(post);
+             return new ResponseEntity<>(HttpStatus.OK);
+         });
      }
-
-
-
 
 
     public boolean update(Posts post, int id)
     {
-        return (boolean) transactionTemplate.execute(new TransactionCallback() {
-            public Object doInTransaction(TransactionStatus status) {
-                if (postsRepository.existsById((long) id)) {
-                    Posts post_old = postsRepository.findById((long) id).get();
-                    if (post.getOwner() == null)
-                        post.setOwner(post_old.getOwner());
-                    if (post.getListComments() == null)
-                        post.setListComments(post_old.getListComments());
-                    if (post.getCountLike() == null)
-                        post.setCountLike(post_old.getCountLike());
-                    if (post.getTitle() == null)
-                        post.setTitle(post_old.getTitle());
-                    if (post.getDateCreate() == null)
-                        post.setDateCreate(post_old.getDateCreate());
-                    if (post.getContent() == null)
-                        post.setContent(post_old.getContent());
-                    if (post.getListusersliked() == null)
-                        post.setListusersliked(post_old.getListusersliked());
-                    post.setId((long) id);
-                    postsRepository.save(post);
-                    return true;
-                }
+        return (boolean) transactionTemplate.execute((TransactionCallback) status -> {
+            if (postsRepository.existsById((long) id)) {
+                Posts post_old = postsRepository.findById((long) id).get();
+                if (post.getOwner() == null)
+                    post.setOwner(post_old.getOwner());
+                if (post.getListComments() == null)
+                    post.setListComments(post_old.getListComments());
+                if (post.getCountLike() == null)
+                    post.setCountLike(post_old.getCountLike());
+                if (post.getTitle() == null)
+                    post.setTitle(post_old.getTitle());
+                if (post.getDateCreate() == null)
+                    post.setDateCreate(post_old.getDateCreate());
+                if (post.getContent() == null)
+                    post.setContent(post_old.getContent());
+                if (post.getListusersliked() == null)
+                    post.setListusersliked(post_old.getListusersliked());
+                post.setId((long) id);
+                postsRepository.save(post);
+                return true;
+            }
 
-                return false;
-            }});
+            return false;
+        });
     }
 
     public  Posts get(int id)
