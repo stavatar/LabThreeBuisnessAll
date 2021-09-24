@@ -4,7 +4,7 @@ import org.springframework.security.authentication.jaas.JaasGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.*;
-
+//Хранилище списка ролей и их полномочий
 public class SecurityRolesManager
 {
     private   static  HashMap<RoleType, Set<ActionType>> roleAction;

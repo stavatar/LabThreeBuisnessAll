@@ -49,22 +49,21 @@ public class UserService
 
     public boolean delete(int  id)
     {
-        return (boolean) transactionTemplate.execute(new TransactionCallback() {
-            public Boolean doInTransaction(TransactionStatus status) {
-                if (usersRepository.existsById((long) id)) {
-                    Users user = (Users) usersRepository.findById((long) id).get();
-                    user.getListPost().forEach(posts -> {
-                        posts.setOwner(null);
-                        postService.save(posts);
-                    });
-                    user.getListComment().forEach(comments -> {
-                        comments.setOwner(null);
-                        commentService.save(comments);
-                    });
-                    usersRepository.delete(user);
-                    return true;
-                } else return false;
-            }});
+        return (boolean) transactionTemplate.execute((TransactionCallback) status -> {
+            if (usersRepository.existsById((long) id)) {
+                Users user = usersRepository.findById((long) id).get();
+                user.getListPost().forEach(posts -> {
+                    posts.setOwner(null);
+                    postService.save(posts);
+                });
+                user.getListComment().forEach(comments -> {
+                    comments.setOwner(null);
+                    commentService.save(comments);
+                });
+                usersRepository.delete(user);
+                return true;
+            } else return false;
+        });
     }
 
 

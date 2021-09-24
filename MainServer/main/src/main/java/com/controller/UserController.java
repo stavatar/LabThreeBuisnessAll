@@ -35,7 +35,6 @@ public class UserController
     public ResponseEntity<List<Users>> readAllUser()
     {
         final List<Users> users = userService.getAll();
-
         return users != null &&  !users.isEmpty()
                 ? new ResponseEntity<>(users, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -45,7 +44,6 @@ public class UserController
     public ResponseEntity<Users> readOneUser(@PathVariable(name = "id") int id)
     {
         final Users client = userService.get(id);
-
         return client != null
                 ? new ResponseEntity<>(client, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -56,11 +54,13 @@ public class UserController
     public ResponseEntity<?> deleteOneUser(@PathVariable(name = "id") int delete_user_id)
     {
         boolean checkPermission;
+        //Проверка прав доступа к изменяемому пользвоателю
         if (userService.findByLogin(SecurityRolesManager.getNameCurrentUser()).getId()==delete_user_id)
             checkPermission = SecurityRolesManager.checkPermission(ActionType.DELETE_YOUR_USER);
         else checkPermission =  SecurityRolesManager.checkPermission(ActionType.DELETE_ALIEN_USER);
         if (checkPermission)
         {
+            //Формирование и отправка сообщения второму серверверу для совершения операции
             jmsTemplate.send("deleteObject.topic", session -> {
                 TextMessage message1 = session.createTextMessage();
                 message1.setText("send");
@@ -81,6 +81,7 @@ public class UserController
     public ResponseEntity<?> updateOneUser(@RequestBody @Parameter(description = "Новый пользователь") Users new_user, @PathVariable(name = "id") @Parameter(description = "Старый пользователь") int update_user_id)
     {
         boolean checkPermission;
+        //Проверка прав доступа к изменяемому пользвоателю
         if (userService.findByLogin(SecurityRolesManager.getNameCurrentUser()).getId()==update_user_id)
             checkPermission = SecurityRolesManager.checkPermission(ActionType.UPDATE_YOUR_USER);
         else checkPermission =  SecurityRolesManager.checkPermission(ActionType.UPDATE_ALIEN_USER);

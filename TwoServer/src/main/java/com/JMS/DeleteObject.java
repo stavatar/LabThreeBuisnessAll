@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class DeleteObject
 {
-
     @Autowired
     private PostService postService;
     @Autowired
@@ -37,13 +36,11 @@ public class DeleteObject
         Comments comment=commentsRepository.findById((long) id).get();
         return  commentService.delete(comment);
     }
-
     public boolean deletePost(int id)
     {
         Posts post = postsRepository.findById((long) id).get();
         return  postService.delete(post);
     }
-
     public boolean deleteUser(int  id)
     {
         return  userService.delete(id);

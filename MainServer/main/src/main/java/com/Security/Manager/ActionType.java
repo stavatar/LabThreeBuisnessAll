@@ -1,5 +1,5 @@
 package com.Security.Manager;
-
+//Полномочия
 public enum ActionType
 {
     WRITE_COMMENTS,WRITE_POSTS,

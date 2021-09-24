@@ -22,9 +22,11 @@ import java.util.Map;
 
 @Component
 @Log
+//Основная логика авторизации
 public class JaasLoginModule implements LoginModule, ApplicationContextAware
 {
-	 static ApplicationContext context;
+    //Для регистрации в  Spring  JaasLoginModule как компонента
+    private static ApplicationContext context;
     private CallbackHandler handler;
     private Subject subject;
     private Users user;
@@ -50,16 +52,14 @@ public class JaasLoginModule implements LoginModule, ApplicationContextAware
         Callback[] callbacks = new Callback[2];
         callbacks[0] = new NameCallback("username");
         callbacks[1] = new PasswordCallback("password", true);
-
         try {
-
             handler.handle(callbacks);
             String password = String.valueOf(((PasswordCallback) callbacks[1]).getPassword());
+            //извлечение логина пользователя из токена
             String userLogin = jwtProvider.getLoginFromToken(password);
             Users userEntity =userService.findByLogin(userLogin);
             if (userEntity!=null) {
                 user=userEntity;
-
                 return true;
             }
         } catch (Exception e) {
@@ -72,7 +72,6 @@ public class JaasLoginModule implements LoginModule, ApplicationContextAware
     public boolean commit() throws LoginException
     {
         subject.getPrincipals().add(new JaasPrincipal(user.getLogin()));
-
         return true;
     }
 

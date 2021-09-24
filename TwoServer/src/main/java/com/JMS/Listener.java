@@ -19,6 +19,7 @@ public class Listener {
     private DeleteObject deleteObject;
     @JmsListener(destination = "deleteObject.topic")
     @SendTo("answer")
+    //Прием сообщения с главного сервера
     public String receiveMessageFromTopic(final Message jsonMessage) throws JMSException
     {
         log.info("[2] Received message " + jsonMessage);
@@ -27,6 +28,7 @@ public class Listener {
             Integer id=textMessage.getIntProperty("id");
             String nameObject=textMessage.getStringProperty("nameObject");
             String loginUser=textMessage.getStringProperty("loginUser");
+            //Выбор действия в зависимости от типа сообщения
             solver(id,loginUser,nameObject);
         }
         return "{\"name\":\"request1\"}";

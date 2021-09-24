@@ -39,15 +39,6 @@ public class PostService
               return null;
           });
     }
-    public void save(Posts post)
-    {
-        transactionTemplate.execute(status ->
-        {
-            postsRepository.save(post);
-            return null;
-        });
-    }
-
 
      public ResponseEntity<?> add_like(int id_post, String login, boolean likeOrDislike)
      {

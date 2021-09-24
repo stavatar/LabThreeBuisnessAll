@@ -26,6 +26,7 @@ import java.util.HashMap;
 
 @Configuration
 @EnableWebSecurity
+//Конфигурация SpringSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
 

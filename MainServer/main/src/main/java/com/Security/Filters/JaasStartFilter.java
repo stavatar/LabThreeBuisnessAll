@@ -33,9 +33,12 @@ public class JaasStartFilter extends GenericFilterBean
 
         HttpServletRequest httpServletRequest= (HttpServletRequest) request;
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        //Получение токена
         String token=getTokenFromRequest((HttpServletRequest) request);
+        //Если пользователь не авторизован и токен существует,то вызов JaasLoginModule
         if ((authentication==null)&&(token!=null))
             httpServletRequest.login("",token);
+
         chain.doFilter(request, response);
 
     }

@@ -47,6 +47,7 @@ public class CommentsController
        @Operation(summary = "Создание комментария")
        public ResponseEntity<?> createOneComment(@RequestBody Comments new_comments, @PathVariable(name = "parent_id") @Parameter(description = "id комментария-родителя") Optional<Long> parent_comments, @PathVariable(name = "id") int posts_id)
     {
+        //Проверка прав доступа для создания комментария
         if (SecurityRolesManager.checkPermission(ActionType.WRITE_COMMENTS))
         {
             if (parent_comments.isPresent())
@@ -59,9 +60,7 @@ public class CommentsController
     @Operation(summary = "Чтение комментария")
     public ResponseEntity<Comments> readOneComment(@PathVariable(name = "id") int id)
     {
-
         final Comments client = commentService.get(id);
-
         return client != null
                 ? new ResponseEntity<>(client, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -83,12 +82,14 @@ public class CommentsController
     public  ResponseEntity<?>  deleteComment(@PathVariable(name = "id") int id)
     {
         boolean checkPermission;
+        //Проверка прав доступа к изменяемому комментарию
         if (userService.containComment(SecurityRolesManager.getNameCurrentUser(),id))
             checkPermission = SecurityRolesManager.checkPermission(ActionType.DELETE_YOUR_COMMENTS);
         else checkPermission =  SecurityRolesManager.checkPermission(ActionType.DELETE_ALIEN_COMMENTS);
 
        if (checkPermission)
         {
+            //Формирование и отправка сообщения второму серверверу для совершения операции
             jmsTemplate.send("deleteObject.topic", session -> {
                 TextMessage message1 = session.createTextMessage();
                 message1.setText("send");
@@ -107,6 +108,7 @@ public class CommentsController
     {
         boolean deleted;
         boolean checkPermission;
+        //Проверка прав доступа к изменяемому комментарию
         if (userService.containComment(SecurityRolesManager.getNameCurrentUser(),id))
             checkPermission = SecurityRolesManager.checkPermission(ActionType.UPDATE_YOUR_COMMENTS);
         else checkPermission =  SecurityRolesManager.checkPermission(ActionType.UPDATE_ALIEN_COMMENTS);

@@ -22,6 +22,7 @@ public class ScheduledTasks
     @Autowired
     UserService userService;
     @Scheduled(cron = "0 0 0 * * *")
+    //удаление неактивных пользователей
     public void deleteInactiveUser()
     {
         log.severe("!!!Поиск и Удаление неактивных юзеров!!!");

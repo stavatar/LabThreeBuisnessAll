@@ -15,6 +15,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = {"com"})
+//Конфигурация транзакций
 public class DbConfig
 {
     JtaTransactionManager jtaTransactionManager;

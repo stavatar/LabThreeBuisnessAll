@@ -41,7 +41,6 @@ public class PostController
     public ResponseEntity<List<Posts>> readAllPosts()
     {
         final List<Posts> posts = postService.getAll();
-
         return posts != null &&  !posts.isEmpty()
                 ? new ResponseEntity<>(posts, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -50,8 +49,9 @@ public class PostController
     @PostMapping(value = "/user/create_post/",consumes = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "Создание поста")
 
-    public ResponseEntity<?> createOnePost(@RequestBody Posts posts) throws ServletException {
-
+    public ResponseEntity<?> createOnePost(@RequestBody Posts posts) throws ServletException
+    {
+        //Проверка прав доступа для создания комментария
         if (SecurityRolesManager.checkPermission(ActionType.WRITE_POSTS))
         {
             postService.create(posts, SecurityRolesManager.getNameCurrentUser());
@@ -85,18 +85,17 @@ public class PostController
     @Operation(summary = "Удалить пост")
     public  ResponseEntity<?>  deleteOnePost(@PathVariable(name = "id") int id)
     {
-
-        boolean deleted;
         boolean checkPermission;
+        //Проверка прав доступа к изменяемому посту
          if (userService.containPost(SecurityRolesManager.getNameCurrentUser(),id))
               checkPermission = SecurityRolesManager.checkPermission(ActionType.DELETE_YOUR_POST);
          else checkPermission =  SecurityRolesManager.checkPermission(ActionType.DELETE_ALIEN_POST);
 
         if(checkPermission)
         {
+            //Формирование и отправка сообщения второму серверверу для совершения операции
             jmsTemplate.send("deleteObject.topic", session -> {
                 TextMessage message1 = session.createTextMessage();
-                
                 message1.setText("send");
                 message1.setStringProperty("loginUser",SecurityRolesManager.getNameCurrentUser());
                 message1.setStringProperty("nameObject","Post");
@@ -113,6 +112,7 @@ public class PostController
     {
         boolean deleted;
         boolean checkPermission;
+        //Проверка прав доступа к изменяемому посту
         if (userService.containPost(SecurityRolesManager.getNameCurrentUser(),id))
             checkPermission = SecurityRolesManager.checkPermission(ActionType.UPDATE_YOUR_POST);
         else checkPermission =  SecurityRolesManager.checkPermission(ActionType.UPDATE_ALIEN_POST);

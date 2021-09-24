@@ -11,6 +11,7 @@ import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
 
 @Configuration
+//Конфигурация ActiveMQ как брокера сообщений
 public class JmsConfig2 {
 
     String BROKER_URL = "tcp://localhost:61616";
