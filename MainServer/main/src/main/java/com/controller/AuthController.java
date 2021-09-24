@@ -49,7 +49,7 @@ public class AuthController
 
     @PostMapping("/auth/")
     @Operation(summary = "Авторизация")
-    public AuthResponse auth(@RequestBody AuthRequest request ) throws ServletException
+    public AuthResponse authUser(@RequestBody AuthRequest request ) throws ServletException
     {
         Users userEntity = userService.findByLoginAndPassword(request.getLogin(), request.getPassword());
         String token = jwtProvider.generateToken(userEntity.getLogin());

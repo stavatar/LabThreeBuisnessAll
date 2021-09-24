@@ -38,7 +38,7 @@ public class PostController
     @GetMapping(value = "/user/posts/")
     @Operation(summary = "Получение всех постов")
 
-    public ResponseEntity<List<Posts>> read()
+    public ResponseEntity<List<Posts>> readAllPosts()
     {
         final List<Posts> posts = postService.getAll();
 
@@ -50,7 +50,7 @@ public class PostController
     @PostMapping(value = "/user/create_post/",consumes = {MediaType.APPLICATION_JSON_VALUE})
     @Operation(summary = "Создание поста")
 
-    public ResponseEntity<?> create(@RequestBody Posts posts) throws ServletException {
+    public ResponseEntity<?> createOnePost(@RequestBody Posts posts) throws ServletException {
 
         if (SecurityRolesManager.checkPermission(ActionType.WRITE_POSTS))
         {
@@ -83,7 +83,7 @@ public class PostController
     }
     @DeleteMapping(value = "/user/post{id}/delete/")
     @Operation(summary = "Удалить пост")
-    public  ResponseEntity<?>  delete(@PathVariable(name = "id") int id)
+    public  ResponseEntity<?>  deleteOnePost(@PathVariable(name = "id") int id)
     {
 
         boolean deleted;
@@ -109,7 +109,7 @@ public class PostController
     }
     @PutMapping(value = "/user/post{id}/update/")
     @Operation(summary = "Изменить пост")
-    public  ResponseEntity<?>  update(@RequestBody Posts new_posts,@PathVariable(name = "id") int id)
+    public  ResponseEntity<?>  updateOnePost(@RequestBody Posts new_posts,@PathVariable(name = "id") int id)
     {
         boolean deleted;
         boolean checkPermission;

@@ -32,7 +32,7 @@ public class UserController
     private JmsTemplate jmsTemplate;
     @GetMapping(value = "/user/users/all/")
     @Operation(summary = "Получение всех пользователей")
-    public ResponseEntity<List<Users>> read()
+    public ResponseEntity<List<Users>> readAllUser()
     {
         final List<Users> users = userService.getAll();
 
@@ -42,7 +42,7 @@ public class UserController
     }
     @GetMapping(value = "/user/users/{id}/")
     @Operation(summary = "Получение  конкретного пользователя")
-    public ResponseEntity<Users> read(@PathVariable(name = "id") int id)
+    public ResponseEntity<Users> readOneUser(@PathVariable(name = "id") int id)
     {
         final Users client = userService.get(id);
 
@@ -53,7 +53,7 @@ public class UserController
 
     @DeleteMapping(value = "/user/users/delete/{id}/")
     @Operation(summary = "Удаление конкретного пользователя")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") int delete_user_id)
+    public ResponseEntity<?> deleteOneUser(@PathVariable(name = "id") int delete_user_id)
     {
         boolean checkPermission;
         if (userService.findByLogin(SecurityRolesManager.getNameCurrentUser()).getId()==delete_user_id)
@@ -78,7 +78,7 @@ public class UserController
 
     @PutMapping(value = "/user/users/update{id}/")
     @Operation(summary = "Изменение пользователя")
-    public ResponseEntity<?> update(@RequestBody @Parameter(description = "Новый пользователь") Users new_user, @PathVariable(name = "id") @Parameter(description = "Старый пользователь") int update_user_id)
+    public ResponseEntity<?> updateOneUser(@RequestBody @Parameter(description = "Новый пользователь") Users new_user, @PathVariable(name = "id") @Parameter(description = "Старый пользователь") int update_user_id)
     {
         boolean checkPermission;
         if (userService.findByLogin(SecurityRolesManager.getNameCurrentUser()).getId()==update_user_id)

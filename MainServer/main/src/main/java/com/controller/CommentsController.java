@@ -35,7 +35,7 @@ public class CommentsController
     private JmsTemplate jmsTemplate;
     @GetMapping(value = "/user/comments_all/")
     @Operation(summary = "Вывод всех комментариев")
-    public ResponseEntity<List<Comments>> readAll()
+    public ResponseEntity<List<Comments>> readAllComments()
     {
         final List<Comments> posts = commentService.getAll();
 
@@ -45,7 +45,7 @@ public class CommentsController
     }
        @PostMapping(value = "/user/post{id}/{parent_id}add_comments/")
        @Operation(summary = "Создание комментария")
-       public ResponseEntity<?> create(@RequestBody Comments new_comments, @PathVariable(name = "parent_id") @Parameter(description = "id комментария-родителя") Optional<Long> parent_comments, @PathVariable(name = "id") int posts_id)
+       public ResponseEntity<?> createOneComment(@RequestBody Comments new_comments, @PathVariable(name = "parent_id") @Parameter(description = "id комментария-родителя") Optional<Long> parent_comments, @PathVariable(name = "id") int posts_id)
     {
         if (SecurityRolesManager.checkPermission(ActionType.WRITE_COMMENTS))
         {
@@ -56,8 +56,8 @@ public class CommentsController
         } else return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
     @GetMapping(value = "/user/comment{id}/read/")
-    @Operation(summary = "Создание комментария")
-    public ResponseEntity<Comments> read(@PathVariable(name = "id") int id)
+    @Operation(summary = "Чтение комментария")
+    public ResponseEntity<Comments> readOneComment(@PathVariable(name = "id") int id)
     {
 
         final Comments client = commentService.get(id);
@@ -69,7 +69,7 @@ public class CommentsController
 
     @GetMapping(value = "/user/comment{id}/getChild/")
     @Operation(summary = "Вывод дочерних комментариев")
-    public ResponseEntity<List<Comments>> getChild(@PathVariable(name = "id") @Parameter(description = "ID комменатрия-родителя") int parent_id)
+    public ResponseEntity<List<Comments>> getChildForComment(@PathVariable(name = "id") @Parameter(description = "ID комменатрия-родителя") int parent_id)
     {
 
         final Comments parent_comment = commentService.get(parent_id);
@@ -80,7 +80,7 @@ public class CommentsController
     }
     @DeleteMapping(value = "/user/comment{id}/delete/")
     @Operation(summary = "Удалить комментарий")
-    public  ResponseEntity<?>  delete(@PathVariable(name = "id") int id)
+    public  ResponseEntity<?>  deleteComment(@PathVariable(name = "id") int id)
     {
         boolean checkPermission;
         if (userService.containComment(SecurityRolesManager.getNameCurrentUser(),id))
@@ -103,7 +103,7 @@ public class CommentsController
     }
     @PutMapping(value = "/user/comment/update/{id}/")
     @Operation(summary = "Изменить комментарий")
-    public  ResponseEntity<?>  update(@RequestBody @Parameter(description = "Изменяемый коммент") Comments comments, @PathVariable(name = "id") @Parameter(description = "Новый коммент") int id)
+    public  ResponseEntity<?>  updateOneComment(@RequestBody @Parameter(description = "Изменяемый коммент") Comments comments, @PathVariable(name = "id") @Parameter(description = "Новый коммент") int id)
     {
         boolean deleted;
         boolean checkPermission;

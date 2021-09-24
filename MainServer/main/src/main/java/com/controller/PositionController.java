@@ -22,7 +22,7 @@ public class PositionController
 
     @GetMapping(value = "/user/role/all/")
     @Operation(summary = "Вывод списка ролей")
-    public ResponseEntity<List<Position>> read()
+    public ResponseEntity<List<Position>> readAllRoles()
     {
         final List<Position> posts = positionService.getAll();
 

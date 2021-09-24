@@ -52,7 +52,6 @@ public class UserService
     }
     public Boolean containPost(String login,long  post_id)
     {
-
         Users user=usersRepository.findByLogin(login);
         Posts post=postService.get((int) post_id);
         if (user.getListPost().contains(post))
