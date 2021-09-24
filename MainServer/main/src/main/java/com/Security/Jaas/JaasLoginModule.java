@@ -29,7 +29,6 @@ public class JaasLoginModule implements LoginModule, ApplicationContextAware
     private Subject subject;
     private  String login;
     private Users user;
-    //private List<String> userGroups;
 
     @Autowired
     private JwtProvider jwtProvider;

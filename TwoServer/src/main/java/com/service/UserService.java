@@ -27,8 +27,7 @@ public class UserService
 {
     @Autowired
     private UsersRepository usersRepository;
-    @Autowired
-    private PositionRepository positionRepository;
+
 
     @Autowired
     private PostService postService;
@@ -45,7 +44,7 @@ public class UserService
     }
     public List<Users> getAll()
     {
-        return (List<Users>) usersRepository.findAll();
+        return usersRepository.findAll();
     }
 
     public boolean delete(int  id)

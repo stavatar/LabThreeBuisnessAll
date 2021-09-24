@@ -19,10 +19,7 @@ public class CommentService
 {
     @Autowired
     private CommentsRepository commentsRepository;
-    @Autowired
-    private PostService postService;
-    @Autowired
-    private UserService userService;
+
     @Autowired
     private TransactionTemplate transactionTemplate;
      public void save(Comments comment)

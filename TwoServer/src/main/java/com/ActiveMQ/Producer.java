@@ -24,7 +24,6 @@ public class Producer {
             TextMessage message1 = session.createTextMessage();
             return message1;
         });
-        //jmsTemplate.convertAndSend();
     }
 
 }

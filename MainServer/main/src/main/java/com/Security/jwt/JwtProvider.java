@@ -26,7 +26,6 @@ public class JwtProvider
     public String generateToken(String login)
     {
         log.severe("login"+login);
-        Date date = Date.from(LocalDate.now().plusDays(30000).atStartOfDay(ZoneId.systemDefault()).toInstant());
          String gen=Jwts.builder()
                 .setSubject(login)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
@@ -34,23 +33,6 @@ public class JwtProvider
         return gen;
     }
 
-    public boolean validateToken(String token) {
-        try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
-            return true;
-        } catch (ExpiredJwtException expEx) {
-            log.severe("Token expired");
-        } catch (UnsupportedJwtException unsEx) {
-            log.severe("Unsupported jwt");
-        } catch (MalformedJwtException mjEx) {
-            log.severe("Malformed jwt");
-        } catch (SignatureException sEx) {
-            log.severe("Invalid signature");
-        } catch (Exception e) {
-            log.severe("invalid token");
-        }
-        return false;
-    }
     public String getLoginFromToken(String token)
     {
         try

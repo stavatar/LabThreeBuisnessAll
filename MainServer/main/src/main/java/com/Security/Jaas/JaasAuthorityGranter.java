@@ -17,6 +17,6 @@ public class JaasAuthorityGranter implements AuthorityGranter
     public Set<String> grant(Principal principal)
     {
         String nameRole=userService.findByLogin(principal.getName()).getPosition().getName().toString();
-        return (Set<String>) Collections.singleton(nameRole);
+        return  Collections.singleton(nameRole);
     }
 }

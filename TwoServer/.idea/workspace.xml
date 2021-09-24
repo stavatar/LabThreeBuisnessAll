@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="caff34ad-7ef7-443f-8818-321d4848186a" name="Default Changelist" comment="" />
+    <list default="true" id="caff34ad-7ef7-443f-8818-321d4848186a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../MainServer/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MainServer/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MainServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MainServer/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/ActiveMQ/AnswerMes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/ActiveMQ/MessageType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/ActiveMQ/Producer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/ActiveMQ/RequestMes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/JMS/SenderMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/Security/Jaas/JaasAuthorityGranter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/Security/Jaas/JaasAuthorityGranter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/Security/Jaas/JaasLoginModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/Security/Jaas/JaasLoginModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/Security/jwt/JwtProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/Security/jwt/JwtProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/config/Security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/config/Security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/controller/CommentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/controller/CommentsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MainServer/main/src/main/java/com/service/PostService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +50,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
@@ -174,6 +189,7 @@
       <workItem from="1621932400397" duration="2947000" />
       <workItem from="1623274455360" duration="101000" />
       <workItem from="1631610709103" duration="1172000" />
+      <workItem from="1632481640204" duration="287000" />
     </task>
     <servers />
   </component>

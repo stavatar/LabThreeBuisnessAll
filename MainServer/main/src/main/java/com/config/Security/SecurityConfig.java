@@ -35,10 +35,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     private JaasStartFilter jwtFilter;
 
 
-        @Override
-        public void configure(WebSecurity web) throws Exception {
-            web.ignoring().antMatchers("/swagger-ui/**", "/v3/api-docs/**");
-        }
+    @Override
+    public void configure(WebSecurity web)  {
+        web.ignoring().antMatchers("/swagger-ui/**", "/v3/api-docs/**");
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception
@@ -57,9 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .authenticated()
                 .and()
                 .addFilterBefore(jwtFilter, AnonymousAuthenticationFilter.class);
-
-
-
     }
 
 
@@ -81,13 +78,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         DefaultJaasAuthenticationProvider def = new DefaultJaasAuthenticationProvider();
         def.setConfiguration(memoryConfig);
         def.setAuthorityGranters(new AuthorityGranter[] {jaasAuthorityGranter});
-
-
         return def;
     }
-    //We are configuring jaasAuthenticationProvider as our global AuthenticationProvider
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth)  {
         auth.authenticationProvider(jaasAuthenticationProvider());
     }
 }

@@ -23,10 +23,6 @@ public class PostService
     @Autowired
     private PostsRepository postsRepository;
     @Autowired
-    private CommentService commentService;
-    @Autowired
-    private UserService userService;
-    @Autowired
     private TransactionTemplate transactionTemplate;
 
 
@@ -37,7 +33,7 @@ public class PostService
         {
             postsRepository.save(post);
             return null;
-        });;
+        });
     }
 
 

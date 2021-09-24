@@ -28,8 +28,6 @@ import java.util.Optional;
 public class CommentsController
 {
     @Autowired
-    private PostService postService;
-    @Autowired
     private UserService userService;
     @Autowired
     private CommentService commentService;

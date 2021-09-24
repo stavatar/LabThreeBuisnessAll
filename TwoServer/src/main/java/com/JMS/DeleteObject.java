@@ -21,11 +21,6 @@ import org.springframework.stereotype.Service;
 public class DeleteObject
 {
 
-
-    @Autowired
-    private UsersRepository usersRepository;
-    @Autowired
-    private PositionRepository positionRepository;
     @Autowired
     private PostService postService;
     @Autowired
